@@ -1,0 +1,37 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css'
+import PropTypes from 'prop-types';
+
+const Greeter = props => <h2>{props.message} {props.name} {props.address.city}</h2>
+
+//default Props
+//ComponentName.defaultProps = {}
+
+Greeter.defaultProps = {
+    name: "default Name",
+    address: {
+        city: "default City"
+    },
+    message: "greet"
+}
+//prop validation ; prop constraints
+Greeter.propTypes = {
+    name: PropTypes.string
+};
+
+
+const App = () => <div className="container">
+    <Greeter name="Subramanian" address={{ city: "Coimbatore" }} message="Hello" />
+    <Greeter />
+    <Greeter name="Subramanian" />
+    <Greeter name="Subramanian" address={{ city: 'Coimbatore' }} />
+    
+    {/* index.js:1 Warning: Failed prop type: Invalid prop `name` of type `number` supplied to `Greeter`, expected `string`.
+    at Greeter (http://localhost:3000/static/js/main.chunk.js:33:20)
+    at App */}
+    <Greeter name={100} />
+
+</div>
+
+ReactDOM.render(<App />, document.getElementById('root'));
